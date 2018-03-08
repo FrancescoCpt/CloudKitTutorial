@@ -13,6 +13,9 @@
 		30F7E61D204ED3F80080E746 /* CloudKitTutorial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30F7E61B204ED3F80080E746 /* CloudKitTutorial.xcdatamodeld */; };
 		30F7E61F204ED3F80080E746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30F7E61E204ED3F80080E746 /* Assets.xcassets */; };
 		30F7E622204ED3F80080E746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30F7E620204ED3F80080E746 /* LaunchScreen.storyboard */; };
+		30F7E62C204ED4A00080E746 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30F7E62B204ED4A00080E746 /* CloudKit.framework */; };
+		30F7E62E204EDBC10080E746 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F7E62D204EDBC10080E746 /* CloudSync.swift */; };
+		30F7E630204EDD280080E746 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F7E62F204EDD280080E746 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,10 @@
 		30F7E61E204ED3F80080E746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30F7E621204ED3F80080E746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30F7E623204ED3F80080E746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30F7E629204ED4650080E746 /* CloudKitTutorial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudKitTutorial.entitlements; sourceTree = "<group>"; };
+		30F7E62B204ED4A00080E746 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		30F7E62D204EDBC10080E746 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
+		30F7E62F204EDD280080E746 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30F7E62C204ED4A00080E746 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +50,7 @@
 			children = (
 				30F7E613204ED3F80080E746 /* CloudKitTutorial */,
 				30F7E612204ED3F80080E746 /* Products */,
+				30F7E62A204ED4A00080E746 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,8 +65,11 @@
 		30F7E613204ED3F80080E746 /* CloudKitTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				30F7E629204ED4650080E746 /* CloudKitTutorial.entitlements */,
 				30F7E614204ED3F80080E746 /* AppDelegate.swift */,
 				30F7E616204ED3F80080E746 /* ViewController.swift */,
+				30F7E62D204EDBC10080E746 /* CloudSync.swift */,
+				30F7E62F204EDD280080E746 /* User.swift */,
 				30F7E618204ED3F80080E746 /* Main.storyboard */,
 				30F7E61E204ED3F80080E746 /* Assets.xcassets */,
 				30F7E620204ED3F80080E746 /* LaunchScreen.storyboard */,
@@ -65,6 +77,14 @@
 				30F7E61B204ED3F80080E746 /* CloudKitTutorial.xcdatamodeld */,
 			);
 			path = CloudKitTutorial;
+			sourceTree = "<group>";
+		};
+		30F7E62A204ED4A00080E746 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30F7E62B204ED4A00080E746 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,6 +120,14 @@
 					30F7E610204ED3F80080E746 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -141,6 +169,8 @@
 			files = (
 				30F7E61D204ED3F80080E746 /* CloudKitTutorial.xcdatamodeld in Sources */,
 				30F7E617204ED3F80080E746 /* ViewController.swift in Sources */,
+				30F7E62E204EDBC10080E746 /* CloudSync.swift in Sources */,
+				30F7E630204EDD280080E746 /* User.swift in Sources */,
 				30F7E615204ED3F80080E746 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +308,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CloudKitTutorial/CloudKitTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 566N8A8DTG;
 				INFOPLIST_FILE = CloudKitTutorial/Info.plist;
@@ -293,6 +324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CloudKitTutorial/CloudKitTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 566N8A8DTG;
 				INFOPLIST_FILE = CloudKitTutorial/Info.plist;

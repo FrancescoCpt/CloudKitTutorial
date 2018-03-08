@@ -8,15 +8,31 @@
 
 import UIKit
 import CoreData
+import CloudKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (authorized, error) in
+            guard error == nil else {
+                print(error.debugDescription)
+                return
+            }
+            if authorized {
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            }
+        }
+        
         return true
     }
 
@@ -43,7 +59,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        //Create a predicate that subscription need to perform
+        let predicate = NSPredicate(value: true)
+        
+        //Create new subscription
+        let subscription = CKQuerySubscription(recordType: "UserInfo", predicate: predicate, options: .firesOnRecordCreation)
+        
+        //create notification info
+        let info = CKNotificationInfo()
+        
+        //setup notification content
+        info.alertLocalizationKey = "%1$@ %2$@ %3$@"
+        info.alertLocalizationArgs = ["name", "surname", "age"]
+        info.shouldBadge = true
+        info.soundName = "default"
+        
+        //add notification to subscription
+        subscription.notificationInfo = info
+        
+        //save subscription on CloudKit
+        CKContainer.default().publicCloudDatabase.save(subscription) { (subscription, error) in
+            
+            //Handle occurred errors
+            guard error == nil else {
+                print(error.debugDescription)
+                return
+            }
+            
+            print("subscription saved")
+        }
+    }
 
+    
+    
+    
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
